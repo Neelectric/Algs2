@@ -9,9 +9,9 @@ public class LineSegmentIntersection {
         Line l1 = new Line();
         Line l2 = new Line();
         l1.p1 = new Point2D.Double(1, 1);
-        l1.p2 = new Point2D.Double(2, 2);
-        l2.p1 = new Point2D.Double(3, 3);
-        l2.p2 = new Point2D.Double(4, 4);
+        l1.p2 = new Point2D.Double(4, 4);
+        l2.p1 = new Point2D.Double(3, 5);
+        l2.p2 = new Point2D.Double(6, 2);
         System.out.println("Intersecting lines: " + lineSegmentIntersection.intersect(l1, l2));
     }
 
