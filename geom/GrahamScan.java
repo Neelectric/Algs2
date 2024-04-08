@@ -23,14 +23,12 @@ public class GrahamScan {
         
     }
 
-    public double angle(LineSegment l1, LineSegment l2){
-        double x1 = l1.p1.getX() - l1.p2.getX();
-        double y1 = l1.p1.getY() - l1.p2.getY();
-        double x2 = l2.p1.getX() - l2.p2.getX();
-        double y2 = l2.p1.getY() - l2.p2.getY();
-        double dot = x1*x2 + y1*y2;
-        double det = x1*y2 - y1*x2;
-        return Math.atan2(det, dot);
+    public double angle(Point2D.Double a, Point2D.Double b, Point2D.Double c){
+        double angle = Math.atan2(c.y - b.y, c.x - b.x) - Math.atan2(a.y - b.y, a.x - b.x);
+        if (angle < 0) {
+            angle += 2 * Math.PI;
+        }
+        return angle;
     }
 
     public Double[] grahamScan(PointSet points){
@@ -41,10 +39,11 @@ public class GrahamScan {
         }
         int m = 2;
         for (int k = 3; k<points.pArray.length; k++) {
-            double angle = angle(new LineSegment(output.pArray[m-1],output.pArray[m]), new LineSegment(output.pArray[m], points.pArray[k]));
-            while (angle  >= Math.PI ){
+            double pi = Math.PI;
+            double angle = angle(output.pArray[m-1],output.pArray[m], points.pArray[k]);
+            while (angle  <= Math.PI ){
                 m--;
-                angle = angle(new LineSegment(output.pArray[m-1],output.pArray[m]), new LineSegment(output.pArray[m], points.pArray[k]));
+                angle = angle(output.pArray[m-1],output.pArray[m], points.pArray[k]);
             }
             output.pArray[++m] = points.pArray[k];
         }
